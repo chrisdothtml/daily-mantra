@@ -2,6 +2,11 @@ import { randomUUID } from 'crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { convosDir } from '../constants.ts';
+import { getEnv } from '../utils.ts';
+
+const SHOULD_STORE_CONVOS = ['1', 'true'].includes(
+  getEnv('SAVE_LLM_CONVOS', '')
+);
 
 /** standardized error thrown by all LLM providers */
 export class LLMError extends Error {
@@ -10,7 +15,7 @@ export class LLMError extends Error {
     public msg: string,
     public code?: string,
     /** id of the stored convo (see {@linkcode LLM.storeConvo}), if a chat exchange completed before the error occurred */
-    public convoId?: string
+    public convoId?: string | null
   ) {
     super(msg);
     this.name = 'LLMError';
@@ -31,7 +36,7 @@ export class LLMError extends Error {
  * provided and the error doesn't already carry one, it's attached so callers
  * can trace an error back to the stored chat exchange that produced it.
  */
-export function toLLMError(error: unknown, convoId?: string): LLMError {
+export function toLLMError(error: unknown, convoId?: string | null): LLMError {
   if (error instanceof LLMError) {
     if (convoId && !error.convoId) error.convoId = convoId;
     return error;
@@ -137,7 +142,12 @@ export abstract class LLM {
   }
 
   /** persists a chat exchange to disk so past experiments/prompts can be revisited */
-  protected async storeConvo(messages: ChatMessage[], response: any) {
+  protected async storeConvo(
+    messages: ChatMessage[],
+    response: any
+  ): Promise<string | null> {
+    if (!SHOULD_STORE_CONVOS) return null;
+
     const convoId = Date.now() + '-' + randomUUID().split('-')[0];
 
     await fs.mkdir(convosDir, { recursive: true });
@@ -150,7 +160,7 @@ export abstract class LLM {
   }
 }
 
-export type ChatResponse = [response: any, convoId: string];
+export type ChatResponse = [response: any, convoId: string | null];
 
 export interface ChatMessage {
   role: 'system' | 'user' | 'assistant';

@@ -31,3 +31,12 @@ ANTHROPIC_MODEL="claude-sonnet-4-5" # optional; this is the default
 GITHUB_TOKEN="github_pat_..." # https://github.com/settings/personal-access-tokens
 NOTES_REPO_SLUG="chrisdothtml/my-notes"
 NOTES_REPO_FILES_AND_DIRS="" # optional; comma-separated file and dir names
+
+###
+# Misc settings
+###
+
+# Enables saving all LLM convos to `~/.daily-mantra/.convos`.
+# Useful for debugging/analyzing model outputs.
+# Note that the `.convos` dir is cleared at the start of every server process
+SAVE_LLM_CONVOS="true"

@@ -146,7 +146,7 @@ export class MantraManager {
     let newMantras: string[];
     // set once `chat` resolves, so a malformed-response error below can still
     // be traced back to the stored convo that produced it
-    let convoId: string | undefined;
+    let convoId: string | null = null;
     try {
       const [res, id] = await this.llm.chat(this.model, messages);
       convoId = id;
