@@ -61,7 +61,7 @@ export class MantraManager {
     - Some paraphrasing is allowed, but primarily defer to thoughts/ideas directly taken from the provided notes.
     - The user's notes/statements may not make sense or be very ambiguous. You can ignore these cases. Only generate mantras that can be generally understood out of context.
     - Phrase the mantras as if the user is speaking to themselves; speak in the second person ("You"/"Your").
-    - Ensure your list of mantras (including the existing mantras) fully encasulates the entirety of the raw notes. Your response list should be deterministic and, when called with the same raw notes, should be the same (somewhat deterministic).
+    - Ensure your list of mantras (including the existing mantras) fully encapsulates the entirety of the raw notes. Your response list should be somewhat deterministic and, when called with the same raw notes, should be the same.
     - Avoid using words like "remember". The entire purpose of this list is to remind the user of insights from their own notes, and explicitly telling them to remember something is redundant.
   `);
 
