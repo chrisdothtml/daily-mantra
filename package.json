@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "prettier --check .",
+    "lint-fix": "prettier --write .",
+    "test": "./bin/tsn --experimental-test-module-mocks --test",
+    "typecheck": "tsc -b --pretty",
+    "start": "./bin/tsn ./src/index.ts"
+  },
+  "volta": {
+    "node": "25.2.1",
+    "yarn": "4.13.0"
+  },
+  "dependencies": {
+    "@koa/router": "^15.7.0",
+    "koa": "^3.2.1",
+    "tar": "^7.5.21"
+  },
+  "devDependencies": {
+    "@types/koa": "^3",
+    "@types/node": "^26.1.1",
+    "prettier": "^3.6.2",
+    "prettier-plugin-sh": "^0.18.0",
+    "typescript": "^5.9.2"
+  }
+}

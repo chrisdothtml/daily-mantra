@@ -1,0 +1,3 @@
+shell_command:
+  get_mantra: >-
+    sh /config/shell/get_mantra.sh "{{ service_host }}"

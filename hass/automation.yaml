@@ -1,0 +1,47 @@
+alias: Daily mantra
+description: Calls internal mantra service and sends its response to my phone
+triggers:
+  - trigger: time
+    at: '09:00:00'
+variables:
+  # replace with a host for your server that's reachable by home assistant
+  service_host: 'http://YOUR_SERVER_IP:PORT'
+
+conditions: []
+
+actions:
+  - action: shell_command.get_mantra
+    data:
+      service_host: '{{ service_host }}'
+    response_variable: endpoint_response
+
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: '{{ endpoint_response.returncode == 0 }}'
+        sequence:
+          # replace with your phone name
+          # e.g. `notify.mobile_app_pixel_10_pro`
+          - action: notify.mobile_app_your_phone
+            data:
+              title: '{{ title }}'
+              message: >-
+                {{ endpoint_response.stdout | trim | default(
+                  "The endpoint returned an empty response.",
+                  true
+                ) }}
+    default:
+      # replace with your phone name
+      # e.g. `notify.mobile_app_pixel_10_pro`
+      - action: notify.mobile_app_your_phone
+        data:
+          title: '{{ title }} failed'
+          message: >-
+            The endpoint failed after 3 attempts.
+
+            {{ endpoint_response.stderr | trim | default(
+              "No error information was returned.",
+              true
+            ) }}
+
+mode: single

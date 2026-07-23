@@ -1,0 +1,8 @@
+.DS_Store
+.data
+.env
+.remember
+.yarn
+node_modules
+TODO.md
+tsconfig.tsbuildinfo

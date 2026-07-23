@@ -1,0 +1,27 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always",
+    "source.addMissingImports.ts": "always",
+    "source.fixAll.prettier": "always"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "files.exclude": {
+    ".yarn/": true,
+    "node_modules/": true,
+    // files that likely won't be touched ever and just pollute files list
+    ".envrc": true,
+    ".prettierrc.cjs": true,
+    ".shellcheckrc": true,
+    ".yarnrc.yml": true,
+    "LICENSE": true,
+    "tsconfig.tsbuildinfo": true
+  },
+  // make sure TS auto-imports have the file extension (required for node)
+  "js/ts.preferences.importModuleSpecifierEnding": "js",
+  "js/ts.preferences.organizeImports": {
+    "caseSensitivity": "caseInsensitive",
+    "typeOrder": "last"
+  },
+  "js/ts.tsdk.path": "node_modules/typescript/lib"
+}

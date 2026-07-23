@@ -1,0 +1,33 @@
+###
+# Server config
+###
+
+HOST="localhost" # optional
+PORT="9001" # optional
+
+###
+# LLM config
+###
+
+## To enable Ollama
+LLM_PROVIDER="ollama"
+OLLAMA_HOST="http://0.0.0.0:11434" # optional; if ollama's running on a different machine
+OLLAMA_MODEL="gpt-oss:20b" # optional; this is the default
+
+## To enable OpenAI
+LLM_PROVIDER="openai"
+OPENAI_TOKEN="sk-proj-..." # https://platform.openai.com
+OPENAI_MODEL="gpt-5.4" # optional; this is the default
+
+## To enable Anthropic
+LLM_PROVIDER="anthropic"
+ANTHROPIC_TOKEN="sk-ant-..." # https://platform.claude.com
+ANTHROPIC_MODEL="claude-sonnet-4-5" # optional; this is the default
+
+###
+# Notes repo config
+###
+
+GITHUB_TOKEN="github_pat_..." # https://github.com/settings/personal-access-tokens
+NOTES_REPO_SLUG="chrisdothtml/my-notes"
+NOTES_REPO_FILES_AND_DIRS="" # optional; comma-separated file and dir names
